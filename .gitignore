@@ -1,0 +1,12 @@
+# 忽略第三方包, 他们已经记录在package.json文件中了
+/node_modules
+
+# 忽略打包后的文件, 因为我们的项目核心是源代码
+/dist
+
+# 忽略隐藏文件
+.*
+
+# 不忽略git配置文件和babel配置文件
+!.gitignore
+!.babelrc
