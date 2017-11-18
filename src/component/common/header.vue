@@ -1,5 +1,7 @@
 <template>
-    <app-header></app-header>
+    <header>
+        <mt-header fixed title="小买卖"></mt-header>
+    </header>
 </template>
 
 <script>
