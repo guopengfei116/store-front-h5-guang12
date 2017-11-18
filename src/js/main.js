@@ -5,6 +5,8 @@ import Vue from 'vue';
 import MintUi from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import Common from '../component/common';  // 自动找到index.js引入
+import 'mui/dist/css/mui.css';
+import 'mui/examples/hello-mui/css/icons-extra.css';
 
 // 1.2 启用vue插件
 Vue.use(MintUi);

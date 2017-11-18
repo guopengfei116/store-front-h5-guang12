@@ -1,5 +1,8 @@
 <template>
-    <app-header></app-header>
+    <main>
+        <app-header></app-header>
+        <app-footer></app-footer>
+    </main>
 </template>
 
 <script>
