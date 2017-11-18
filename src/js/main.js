@@ -15,13 +15,16 @@ Vue.use(MintUi);
 Vue.use(Common);
 Vue.use(VueRouter);
 
-Vue.prototype.axios = axios;   // 把axios库放置到原型, 将来其他组件直接可以拿到axios对象
-
 // 2.1 导入根组件
 import AppComponent from '../component/App.vue';
 
 // 2.2 导入配置
-import routerConfig from '../router'  // 自动找到index.js引入
+import routerConfig from '../router'    // 自动找到index.js引入
+import apiConfig from './api_config.js'
+
+// 2.3 扩展实例成员
+Vue.prototype.axios = axios;   // 把axios库放置到原型, 将来其他组件直接可以拿到axios对象
+Vue.prototype.api = apiConfig;
 
 // 2.2 渲染根组件, 启动项目
 new Vue({
