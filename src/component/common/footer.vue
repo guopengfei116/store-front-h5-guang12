@@ -5,7 +5,7 @@
                 <span class="mui-icon mui-icon-home"></span>
                 <span class="mui-tab-label">首页</span>
             </router-link>
-            <router-link class="mui-tab-item" to="/">
+            <router-link class="mui-tab-item" v-bind:to="{ name: 'gl' }">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-gift"></span>
                 <span class="mui-tab-label">商品购买</span>
             </router-link>
