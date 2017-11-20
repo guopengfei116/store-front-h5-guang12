@@ -10,6 +10,7 @@ import 'mui/examples/hello-mui/css/icons-extra.css';
 import axios from 'axios';  
 import VueRouter from 'vue-router';
 import Filter from '../filter'             // 自动找到index.js引入
+import '../less/index.less'; 
 
 // 1.2 启用vue插件
 Vue.use(MintUi);

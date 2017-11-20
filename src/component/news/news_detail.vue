@@ -38,6 +38,9 @@ export default {
 </script>
 
 <style scoped>
+article {
+    overflow: hidden;
+}
 .mui-card-header, .mui-card-footer {
     display: block;
 }
