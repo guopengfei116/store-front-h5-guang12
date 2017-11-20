@@ -13,7 +13,7 @@
             <ul class="mui-table-view mui-grid-view">
 		        <li class="mui-table-view-cell mui-media mui-col-xs-4"
                     v-for="item in photoThumList" v-bind:key="item.src">
-                    <img class="mui-media-object" v-bind:src="item.src">
+                    <img class="mui-media-object" v-bind:src="item.src" v-preview="item.src">
                 </li>
 		    </ul>
             <!-- content内容中含有html标签, 要让它正常展示, 必须使用v-html -->

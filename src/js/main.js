@@ -11,12 +11,14 @@ import axios from 'axios';
 import VueRouter from 'vue-router';
 import Filter from '../filter'             // 自动找到index.js引入
 import '../less/index.less'; 
+import VuePP from 'vue-picture-preview';
 
 // 1.2 启用vue插件
 Vue.use(MintUi);
 Vue.use(Common);
 Vue.use(VueRouter);
 Vue.use(Filter);
+Vue.use(VuePP);
 
 // 2.1 导入配置
 import routerConfig from '../router'    // 自动找到index.js引入
