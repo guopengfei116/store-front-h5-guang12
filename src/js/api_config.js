@@ -19,7 +19,7 @@ export default {
     goodsL: `${domain}/getgoods/`,          // 该接口后面需要一个页码: /getgoods/?pageindex=number
     goodsD: `${domain}/goods/getdesc/`,     // 该接口后面需要一个商品id: /getdesc/:id
     goodsT: `${domain}/getthumimages/`,     // 该接口后面需要一个商品id: /getthumimages/:id
-    goodsP: `${domain}/getinfo/`,           // 该接口后面需要一个商品id: /getinfo/:id
+    goodsP: `${domain}/goods/getinfo/`,           // 该接口后面需要一个商品id: /getinfo/:id
 
     // 购物车相关接口
     shopcL: `${domain}/goods/getshopcarlist/`,  // 该接口后面需要一串id: /getshopcarlist/:ids
