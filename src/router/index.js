@@ -6,6 +6,7 @@ import PhotoListComponent from '../component/photo/photo_list.vue';
 import PhotoDetailComponent from '../component/photo/photo_detail.vue';
 import GoodsListComponent from '../component/goods/goods_list.vue';
 import GoodsDetailComponent from '../component/goods/goods_detail.vue';
+import ShopcartComponent from '../component/shopcart/shopcart.vue';
 
 export default {
     routes: [
@@ -24,5 +25,8 @@ export default {
         // 商品相关路由
         { name: "gl", path: '/goods/list/', component: GoodsListComponent },
         { name: "gd", path: '/goods/detail/:id', component: GoodsDetailComponent },
+
+        // 购物车相关路由
+        { name: "sc", path: '/shopcart', component: ShopcartComponent },
     ]
 };

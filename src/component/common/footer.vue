@@ -9,7 +9,7 @@
                 <span class="mui-icon mui-icon-extra mui-icon-extra-gift"></span>
                 <span class="mui-tab-label">商品购买</span>
             </router-link>
-            <router-link class="mui-tab-item" to="/">
+            <router-link class="mui-tab-item" v-bind:to="{ name: 'sc' }">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
