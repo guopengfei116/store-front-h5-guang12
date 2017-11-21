@@ -34,18 +34,18 @@
 
 		<!-- 评论与介绍 -->
 		<div class="mui-card">
-			<!-- 选项卡 -->
-		    <mt-navbar value="tab-container2">
-			  <mt-tab-item id="tab-container1">商品评论</mt-tab-item>
-			  <mt-tab-item id="tab-container2">图文介绍</mt-tab-item>
+			<!-- 选项卡, 利用value的值控制选取那个子元素 -->
+      <mt-navbar v-model="navbarSelector">
+			  <mt-tab-item id="commont">商品评论</mt-tab-item>
+			  <mt-tab-item id="intro">图文介绍</mt-tab-item>
 			</mt-navbar>
-			<!-- 内容 -->
-		    <mt-tab-container value="tab-container2">
-			  <mt-tab-container-item id="tab-container1">
-			    <mt-cell v-for="n in 10" title="tab-container 1"></mt-cell>
+			<!-- 内容, 利用value的值控制选取那个子元素 -->
+      <mt-tab-container v-model="navbarSelector">
+			  <mt-tab-container-item id="commont">
+			    <p>内容1</p>
 			  </mt-tab-container-item>
-			  <mt-tab-container-item id="tab-container2">
-			    <mt-cell v-for="n in 5" title="tab-container 2"></mt-cell>
+			  <mt-tab-container-item id="intro">
+			    <p>内容2</p>
 			  </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
@@ -59,7 +59,8 @@ export default {
     return {
       id: this.$route.params.id,
       lunbos: [],
-      goodsPrice: {}
+      goodsPrice: {},
+      navbarSelector: 'commont'
     };
   },
 
