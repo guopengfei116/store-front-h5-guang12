@@ -17,14 +17,14 @@
         <div class="price"> <s>市场价:￥{{ goodsPrice.market_price }}</s> <span>销售价: </span> <em>￥{{ goodsPrice.sell_price }}</em> </div>
         <div> <span>购买数量：</span>
           <!--数字输入框 -->
-          <app-numbox initVal="88" @change="getTotal"></app-numbox>
+          <app-numbox v-bind:initVal="buyCount" @change="getTotal"></app-numbox>
         </div>
       </div>
       <!-- 按钮 -->
       <div class="mui-card-footer">
       	<button type="button" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined">结算</button>
         <div></div>
-        <button type="button" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined">加入购物车</button>
+        <button type="button" @click="addShopcart" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined">加入购物车</button>
       </div>
     </div>
 
@@ -51,6 +51,7 @@
 
 <script>
 import IntroComponent from './son/intro.vue';
+import storage from '../../js/storage.js';
 
 export default {
   data() {
@@ -58,7 +59,8 @@ export default {
       id: this.$route.params.id,
       lunbos: [],
       goodsPrice: {},
-      navbarSelector: 'commont'
+      navbarSelector: 'commont',
+      buyCount: 0
     };
   },
 
@@ -75,9 +77,16 @@ export default {
       .then( rsp => this.goodsPrice = rsp.data.message[0] );
     },
 
-    // 获取最新的购买数量
+    // 获取最新的购买数量, 并存储起来
     getTotal(total) {
-      console.log(total);
+      this.buyCount = total;
+    },
+
+    // 加入购物车
+    addShopcart() {
+      let oldBuyData = storage.get('goodsBuyData') || {};  // 取出旧的值
+      oldBuyData[this.id] = this.buyCount;                 // 添加或修改商品的购买记录
+      storage.set('goodsBuyData', oldBuyData);             // 把新的数据存起来
     }
   },
 
