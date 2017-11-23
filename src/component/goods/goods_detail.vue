@@ -60,7 +60,7 @@ export default {
       lunbos: [],
       goodsPrice: {},
       navbarSelector: 'commont',
-      buyCount: storage.get('goodsBuyData')[this.$route.params.id]
+      buyCount: (storage.get('goodsBuyData') || {})[this.$route.params.id]
     };
   },
 
