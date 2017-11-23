@@ -12,6 +12,7 @@ import VueRouter from 'vue-router';
 import Filter from '../filter'             // 自动找到index.js引入
 import '../less/index.less'; 
 import VuePP from 'vue-picture-preview';
+import Vuex from 'vuex';
 
 // 1.2 启用vue插件
 Vue.use(MintUi);
@@ -19,10 +20,12 @@ Vue.use(Common);
 Vue.use(VueRouter);
 Vue.use(Filter);
 Vue.use(VuePP);
+Vue.use(Vuex);
 
 // 2.1 导入配置
 import routerConfig from '../router'    // 自动找到index.js引入
 import apiConfig from './api_config.js'
+import store from '../vuex';            // 自动找到index.js引入
 
 // 2.2 扩展实例成员
 Vue.prototype.axios = axios;   // 把axios库放置到原型, 将来其他组件直接可以拿到axios对象
@@ -37,5 +40,6 @@ new Vue({
     render(createNode) {
         return createNode(AppComponent);
     },
-    router: new VueRouter(routerConfig)
+    router: new VueRouter(routerConfig),
+    store: new Vuex.Store(store)
 });
