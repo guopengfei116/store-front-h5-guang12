@@ -9,6 +9,7 @@ import GoodsDetailComponent from '../component/goods/goods_detail.vue';
 import ShopcartComponent from '../component/shopcart/shopcart.vue';
 
 export default {
+    linkActiveClass: 'mui-active',
     routes: [
         // 首页路由配置
         { path: "/", redirect: "/index" },

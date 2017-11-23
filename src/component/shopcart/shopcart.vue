@@ -15,7 +15,7 @@
               <app-numbox v-bind:initVal="goodsBuyData[item.id]" @change="modifyBuyData(item.id, $event)"></app-numbox>
             </li>
             <li>
-              <a href="javascript:void(0)">删除</a>
+              <a href="javascript:void(0)" @click="delGoods(item.id)">删除</a>
             </li>
           </ul>
         </div>
@@ -67,6 +67,12 @@ export default {
     modifyBuyData(id, val) {
       this.goodsBuyData[id] = val;
       console.log(this.goodsBuyData)
+    },
+
+    // 删除商品
+    delGoods(id) {
+      this.$delete(this.goodsBuyData, id);
+      this.buyGoodsList = this.buyGoodsList.filter(v => v.id != id);
     }
   },
 
