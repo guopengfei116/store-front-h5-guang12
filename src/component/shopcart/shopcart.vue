@@ -12,7 +12,7 @@
             <li>￥{{ item.sell_price }}</li>
             <li>
               <!-- 公共的数字输入框, 修改商品数量需要拿到id与子传给父的值, 所以这里需要使用()传参, $event就代表子传父的数据 -->
-              <app-numbox v-bind:initVal="goodsBuyData[item.id]" @change="modifyBuyData(item.id, $event)"></app-numbox>
+              <app-numbox v-bind:initVal="$store.state.goodsBuyData[item.id]" @change="modifyBuyData(item.id, $event)"></app-numbox>
             </li>
             <li>
               <a href="javascript:void(0)" @click="delGoods(item.id)">删除</a>
@@ -39,12 +39,9 @@
 </template>
 
 <script>
-import storage from '../../js/storage.js';
-
 export default {
   data() {
     return {
-      goodsBuyData: storage.get('goodsBuyData'),
       buyGoodsList: []
     }
   },
@@ -52,7 +49,10 @@ export default {
   methods: {
     // 获取购物车列表数据
     getBuyGoodsList() {
-      let ids = Object.keys(storage.get('goodsBuyData')).join(',');
+      let ids = Object.keys(this.$store.state.goodsBuyData).join(',');
+      if(!ids) {
+        return;
+      }
       this.axios.get(this.api.shopcL + ids)
       .then( 
         rsp => {
@@ -65,13 +65,17 @@ export default {
 
     // 修改购买数据
     modifyBuyData(id, val) {
-      this.goodsBuyData[id] = val;
-      console.log(this.goodsBuyData)
+      this.$store.commit('upBuyData', {
+        id: id,
+        total: val
+      });
     },
 
     // 删除商品
     delGoods(id) {
-      this.$delete(this.goodsBuyData, id);
+      this.$store.commit('delBuyData', {
+        id: id
+      });
       this.buyGoodsList = this.buyGoodsList.filter(v => v.id != id);
     }
   },
@@ -86,7 +90,7 @@ export default {
       return this.buyGoodsList.reduce((sum, goods) => {
         // reduce方法每次把上一次的sum结果传递进来, 供我们继续累加,
         // 如果商品为选中状态我们就累加, 否则原物传递到下一次计算
-        return goods.isSelected? sum + this.goodsBuyData[goods.id] : sum
+        return goods.isSelected? sum + this.$store.state.goodsBuyData[goods.id] : sum
       }, 0);
     },
 
@@ -95,19 +99,8 @@ export default {
       return this.buyGoodsList.reduce((sum, goods) => {
         // reduce方法每次把上一次的sum结果传递进来, 供我们继续累加,
         // 如果商品为选中状态我们就累加, 否则原物传递到下一次计算
-        return goods.isSelected? sum + this.goodsBuyData[goods.id] * goods.sell_price : sum
+        return goods.isSelected? sum + this.$store.state.goodsBuyData[goods.id] * goods.sell_price : sum
       }, 0);
-    }
-  },
-
-  watch: {
-    // 监听商品数量的变化, 实时存储的本地storage
-    goodsBuyData: {
-      handler() {
-        storage.set('goodsBuyData', this.goodsBuyData);
-      },
-      // 深度监听对象的变化, 这样vue每次会比较子属性的值
-      deep: true
     }
   }
 };
