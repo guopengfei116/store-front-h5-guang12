@@ -26,7 +26,7 @@
       <div class="total_val">
         <ul>
           <li>总计（不含运费）</li>
-          <li>已勾选商品{{ selectedGoodsTotal }}件,总价:￥{{ selectedGoodsPriceTotal }}元</li>
+          <li>已勾选商品{{ buyTotal }}件,总价:￥品{{ buyPriceTotal }}元</li>
         </ul>
       </div>
       <div class="total_btn">
@@ -43,6 +43,7 @@ import storage from '../../js/storage.js';
 export default {
   data() {
     return {
+      goodsBuyData: storage.get('goodsBuyData'),
       buyGoodsList: []
     }
   },
@@ -59,11 +60,6 @@ export default {
           this.buyGoodsList = rsp.data.message;
         }
       );
-    },
-
-    // 通过商品id获取对应数据
-    getBuyCountById(id) {
-      return storage.get('goodsBuyData')[id];
     }
   },
 
@@ -72,30 +68,21 @@ export default {
   },
 
   computed: {
-    // 已勾选的商品总件数
-    // selectedGoodsTotal() {
-    //   // 遍历购物车商品列表, 如果该商品是选中状态, 那么获取这个商品的购买数量累加起来
-    //   let sum = 0;
-    //   this.buyGoodsList.forEach((goods) => {
-    //     if(goods.isSelected) {
-    //       sum += this.getBuyCountById(goods.id);
-    //     }
-    //   });
-    //   return sum;
-    // },
-
-    selectedGoodsTotal() {
+    // 总数
+    buyTotal() {
       return this.buyGoodsList.reduce((sum, goods) => {
-        return goods.isSelected? sum + this.getBuyCountById(goods.id) : sum;
+        // reduce方法每次把上一次的sum结果传递进来, 供我们继续累加,
+        // 如果商品为选中状态我们就累加, 否则原物传递到下一次计算
+        return goods.isSelected? sum + this.goodsBuyData[goods.id] : sum
       }, 0);
     },
 
-
-    // 已勾选的商品总价
-    selectedGoodsPriceTotal() {
-      // 遍历购物车商品列表, 如果该商品是选中状态, 那么获取这个商品的价格 * 购买数量, 然后结果累加起来
+    // 总价
+    buyPriceTotal() {
       return this.buyGoodsList.reduce((sum, goods) => {
-        return goods.isSelected? sum + this.getBuyCountById(goods.id) * goods.sell_price : sum;
+        // reduce方法每次把上一次的sum结果传递进来, 供我们继续累加,
+        // 如果商品为选中状态我们就累加, 否则原物传递到下一次计算
+        return goods.isSelected? sum + this.goodsBuyData[goods.id] * goods.sell_price : sum
       }, 0);
     }
   }
